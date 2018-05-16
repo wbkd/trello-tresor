@@ -1,0 +1,34 @@
+{
+  "name": "kanbancms",
+  "version": "0.0.1",
+  "description": "A Kanban-based static site generator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbkd/KanbanCMS.git"
+  },
+  "keywords": [
+    "static",
+    "site",
+    "generator",
+    "cms",
+    "blog",
+    "kanban",
+    "boards"
+  ],
+  "author": "g-div",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wbkd/KanbanCMS/issues"
+  },
+  "homepage": "https://github.com/wbkd/KanbanCMS#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "parcel": "^1.8.1",
+    "parcel-bundler": "^1.8.1"
+  }
+}
