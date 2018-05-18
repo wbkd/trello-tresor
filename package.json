@@ -2,9 +2,15 @@
   "name": "kanbancms",
   "version": "0.0.1",
   "description": "A Kanban-based static site generator",
-  "main": "index.js",
+  "main": "src/index.html",
   "scripts": {
-    "start": "node index.js",
+    "clean": "rimraf dist",
+    "preget-data": "npm run clean",
+    "get-data": "node bin/get_data.js",
+    "prebuild": "npm run get-data",
+    "build": "parcel build $npm_pkg_main",
+    "prestart": "npm run get-data",
+    "start": "parcel $npm_pkg_main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,9 +32,10 @@
     "url": "https://github.com/wbkd/KanbanCMS/issues"
   },
   "homepage": "https://github.com/wbkd/KanbanCMS#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "axios": "^0.18.0",
-    "parcel": "^1.8.1",
-    "parcel-bundler": "^1.8.1"
+    "parcel-bundler": "^1.8.1",
+    "rimraf": "^2.6.2"
   }
 }
