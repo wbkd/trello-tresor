@@ -33,4 +33,5 @@ You can also select the fields of a [card](https://developers.trello.com/referen
 FIELDS=id,name,dateLastActivity,desc,idList,labels
 ATTACHMENTS_FIELDS=preview,url
 USER_FIELDS=fullName,bio
+LIST_NAME=Public
 ```
