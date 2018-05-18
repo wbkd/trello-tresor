@@ -10,7 +10,7 @@ const LIST_NAME = process.env.LIST_NAME;
 
 const DEST = process.env.DEST || path.resolve('src', 'static');
 const FIELDS = process.env.FIELDS || ['id', 'name', 'dateLastActivity', 'desc', 'idList', 'labels'].join();
-const ATTACHMENTS_FIELDS = process.env.ATTACHMENTS_FIELDS || ['preview', 'url'].join();
+const ATTACHMENTS_FIELDS = process.env.ATTACHMENTS_FIELDS || ['previews', 'url'].join();
 const USER_FIELDS = process.env.USER_FIELDS || ['fullName', 'bio'].join();
 const API_URL = `https://api.trello.com/1/`;
 const CARD_SUFFIX = `/cards?fields=${FIELDS}&attachments=true&attachment_fields=${ATTACHMENTS_FIELDS}&members=true&member_fields=${USER_FIELDS}&key=${API_KEY}&token=${API_TOKEN}`;
