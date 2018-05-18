@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // list posts
         const container = document.querySelector('#container');
         container.innerHTML = `<ul>${data.map(element => {
-            return `<li>${element.name}</li>`
+            if (element.attachments[0].previews.length > 0) {
+                return `<li>${element.name} <img src="${element.attachments[0].previews[0].url}"></li>`;
+            } else {
+                return `<li>${element.name} </li>`;
+            }
         })}</ul>`;
 
     }
