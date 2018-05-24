@@ -19,19 +19,59 @@ npm install
 
 ### Usage
 
-You will need to add the API Key and the API Token from your [Trello App Key](https://trello.com/app-key) to the `.env` file placed in the project root directory.
-An example of `.env` file will be:
+You will need to copy the API Key and the API Token from your [Trello App Key](https://trello.com/app-key) to the `config.json` file. An example config file will look like this:
+```
+{
+    "api": {
+        "url": "https://api.trello.com/1/",
+        "key": "asenoiuwqeWNEUfnewoeFNWQetr3295023rer",
+        "token": "ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543",
+        "list": "124f9hue2983232rj32052s"
+    },
+    "dest": {
+        "root": "src/static",
+        "all": "all.json",
+        "tags": "tags.json",
+        "post": "post",
+        "tag": "tag"
+    },
+    "fields": {
+        "fields": ["id", "name", "dateLastActivity", "desc", "idList", "labels"],
+        "members": true,
+        "member_fields": ["fullName", "bio"],
+        "attachments": true,
+        "attachment_fields": ["previews", "url"]
+    }
+}
+```
+
+The config options can be also passed as environment variables or as command-line arguments:
+```
+API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s node bin/get_data.js
 
 ```
-LIST_ID=asndiuhwqe9832143hz58
-API_KEY=qjoiurh723328r732093rjewf84327t82
-API_TOKEN=nr32789r3298421n9823r1j432198r329r2r32b43znjgkn923rn
+```
+node bin/get_data.js --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
 ```
 
-You can also select the fields of a [card](https://developers.trello.com/reference#card-object), an [attachment](https://developers.trello.com/v1.0/reference#attachments) or an [user](https://developers.trello.com/v1.0/reference#member-object) adding the following to your `.env` file:
-```
-FIELDS=id,name,dateLastActivity,desc,idList,labels
-ATTACHMENTS_FIELDS=preview,url
-USER_FIELDS=fullName,bio
-LIST_NAME=Public
-```
+#### Options
+
+| Name        | Description                                       | Default                       |
+|-------------|---------------------------------------------------|-------------------------------|
+| api.url     | The base API url                                  | `"https://api.trello.com/1/"` |
+| api.key     | The API key (**required**)                        |                               |
+| api.token   | The API token (**required**)                      |                               |
+| api.list    | The ID of the trello list to watch (**required**) |                               |
+| dest.root   | The folder where all JSON files are saved         | `"src/static/"`               |
+| dest.all    | The filename of the JSON containings all entries  | `"all.json"`                  |
+| dest.tags   | The filename of the JSON containings all tags     | `"tags.json"`                 |
+| dest.post   | The folder name where all single posts are saved  | `"post"`                      |
+| dest.tag    | The folder name where all single tags are saved   | `"tag"`                       |
+| fields.fields | The post fields to be displayed                 | `["id", "name", "dateLastActivity", "desc", "idList", "labels"]` |
+| fields.members | Display or not user information (true or false) | `true`                      |
+| fields.member_fields | The user fields to be displayed           | `["fullName", "bio"]'       |
+| fields.attachments | Display or not attachments information (true or false) | `true`           |
+| fields.attachment_fields | The attachment fields to be displayed | `["previews", "url"]`       |
+
+
+To get further information about the fields you can select, please referr to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.

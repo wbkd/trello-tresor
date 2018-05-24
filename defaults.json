@@ -1,0 +1,19 @@
+{
+    "api": {
+        "url": "https://api.trello.com/1/"
+    },
+    "dest": {
+        "root": "src/static",
+        "all": "all.json",
+        "tags": "tags.json",
+        "post": "post",
+        "tag": "tag"
+    },
+    "fields": {
+        "fields": ["id", "name", "dateLastActivity", "desc", "idList", "labels"],
+        "members": true,
+        "member_fields": ["fullName", "bio"],
+        "attachments": true,
+        "attachment_fields": ["previews", "url"]
+    }
+}
