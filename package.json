@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A Kanban-based static site generator",
   "main": "src/js/index.js",
+  "bin": {
+    "staticms": "bin/get_data.js"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "preget-data": "npm run clean",

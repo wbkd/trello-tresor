@@ -3,7 +3,7 @@
         "url": "https://api.trello.com/1/"
     },
     "dest": {
-        "root": "src/static",
+        "root": "static",
         "all": "all.json",
         "tags": "tags.json",
         "post": "post",
