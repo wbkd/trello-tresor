@@ -4,9 +4,19 @@
 
 A Kanban based static site generator.
 
+KanbanCMS uses Trello as a redactional UI of Content Managment System. You can transform a Trello board into a static website, like for example a blog. Every change on your board will trigger a new build process using Webhooks. The build contains the static files you can deploy somewhere to host your static website.
+
 ## How it works ?
 
-KanbanCMS uses Trello as a redactional UI of Content Managment System. You can transform a Trello board into a static website, like for example a blog. Every time you change something on your board a new build process can be triggered using Webhooks. The build contains the static files you can deploy somewhere to host your static website.
+This script is responsible to read a remote API (at the moment Trello is supported) and save the results locally as static JSON files, in a folder structure that allow to consume the data as a API endpoints.
+The static files can be either copied in the client build folder or hosted somewhere else, so that the client can then consume the data in a RESTful way.
+
+Setting up Continous Delivery it is then possible to configure a Webhook to trigger a new build when the content served from you API is changed:
+```
+Outgoing Webhook: API (e.g. Trello) -> Incoming Webhook: CI/CD (build)
+```
+
+This approach will allow your codebase to be entirely static and serverless, but will also have the advantages of a dynamic content management system, as your site will be automatically updated when the content provided by your third-party API changes.
 
 ### Installation
 
@@ -19,7 +29,7 @@ npm install
 
 ### Usage
 
-You will need to copy the API Key and the API Token from your [Trello App Key](https://trello.com/app-key) to the `config.json` file. An example config file will look like this:
+You will need to copy the API Key and the API Token from your [Trello App Key](https://trello.com/app-key) to the `config.json` file. An example config file will look like this (see [options](#options)):
 ```
 {
     "api": {
@@ -45,16 +55,24 @@ You will need to copy the API Key and the API Token from your [Trello App Key](h
 }
 ```
 
+And run the following command to download the JSON files:
+```
+node bin/get_data.js
+```
+
 The config options can be also passed as environment variables or as command-line arguments:
 ```
 API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s node bin/get_data.js
 
 ```
+or
 ```
 node bin/get_data.js --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
 ```
 
 #### Options
+
+The options you can add to the `config.json` file or pass via command-line/environment variable are:
 
 | Name        | Description                                       | Default                       |
 |-------------|---------------------------------------------------|-------------------------------|
