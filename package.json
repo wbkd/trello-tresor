@@ -2,15 +2,15 @@
   "name": "kanbancms",
   "version": "0.0.1",
   "description": "A Kanban-based static site generator",
-  "main": "src/index.html",
+  "main": "src/js/index.js",
   "scripts": {
     "clean": "rimraf dist",
     "preget-data": "npm run clean",
     "get-data": "node bin/get_data.js",
     "prebuild": "npm run get-data",
-    "build": "parcel build $npm_pkg_main",
+    "build": "parcel build src/index.html",
     "prestart": "npm run get-data",
-    "start": "parcel $npm_pkg_main",
+    "start": "parcel src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
