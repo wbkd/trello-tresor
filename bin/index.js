@@ -44,7 +44,7 @@ async function main() {
 
 // helper to write JSON files to the provided location inside the root folder
 const writeToFile = async (location, data) => {
-  const fullPath = path.resolve(dest.root, location);
+  const fullPath = path.resolve(config.dest.root, location);
   try {
     await mkdir(path.dirname(fullPath));
     fs.writeFileSync(fullPath, JSON.stringify(data));

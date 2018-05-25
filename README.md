@@ -1,10 +1,10 @@
-# KanbanCMS
+# staticms
 
 /!\ WIP /!\
 
-A Kanban based static site generator.
+A tool to fetch remote API data and store them locally as static JSON files.
 
-KanbanCMS uses Trello as a redactional UI of Content Managment System. You can transform a Trello board into a static website, like for example a blog. Every change on your board will trigger a new build process using Webhooks. The build contains the static files you can deploy somewhere to host your static website.
+With staticms you can for example use Trello as a redactional UI and content managment system. You can transform a Trello board into a static website, like for example a blog. Every change on your board will trigger a new build process using Webhooks. The build contains the static files you can deploy somewhere to host your static website.
 
 ## How it works ?
 
@@ -22,14 +22,12 @@ This approach will allow your codebase to be entirely static and serverless, but
 
 Run:
 ```
-git clone https://github.com/wbkd/KanbanCMS
-cd KanbanCMS
-npm install
+npm install staticms
 ```
 
 ### Usage
 
-You will need to copy the API Key and the API Token from your [Trello App Key](https://trello.com/app-key) to the `config.json` file. An example config file will look like this (see [options](#options)):
+You will need to copy the API Key and the API Token from your [Trello App Key](https://trello.com/app-key) to the `config.json` file in the project root folder. An example config file will look like this (see [options](#options)):
 ```
 {
     "api": {
@@ -39,7 +37,7 @@ You will need to copy the API Key and the API Token from your [Trello App Key](h
         "list": "124f9hue2983232rj32052s"
     },
     "dest": {
-        "root": "src/static",
+        "root": "static",
         "all": "all.json",
         "tags": "tags.json",
         "post": "post",
@@ -57,17 +55,17 @@ You will need to copy the API Key and the API Token from your [Trello App Key](h
 
 And run the following command to download the JSON files:
 ```
-node bin/get_data.js
+staticms
 ```
 
 The config options can be also passed as environment variables or as command-line arguments:
 ```
-API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s node bin/get_data.js
+API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s staticms
 
 ```
 or
 ```
-node bin/get_data.js --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
+staticms --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
 ```
 
 #### Options
@@ -80,7 +78,7 @@ The options you can add to the `config.json` file or pass via command-line/envir
 | api.key     | The API key (**required**)                        |                               |
 | api.token   | The API token (**required**)                      |                               |
 | api.list    | The ID of the trello list to watch (**required**) |                               |
-| dest.root   | The folder where all JSON files are saved         | `"src/static/"`               |
+| dest.root   | The folder where all JSON files are saved         | `"static/"`               |
 | dest.all    | The filename of the JSON containings all entries  | `"all.json"`                  |
 | dest.tags   | The filename of the JSON containings all tags     | `"tags.json"`                 |
 | dest.post   | The folder name where all single posts are saved  | `"post"`                      |

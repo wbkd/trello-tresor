@@ -1,24 +1,18 @@
 {
-  "name": "kanbancms",
+  "name": "staticms",
   "version": "0.0.1",
-  "description": "A Kanban-based static site generator",
-  "main": "src/js/index.js",
+  "description": "A tool to fetch remote API data and store them locally as static JSON files",
+  "main": "bin/index.js",
   "bin": {
-    "staticms": "bin/get_data.js"
+    "staticms": "bin/index.js"
   },
   "scripts": {
-    "clean": "rimraf dist",
-    "preget-data": "npm run clean",
-    "get-data": "node bin/get_data.js",
-    "prebuild": "npm run get-data",
-    "build": "parcel build src/index.html",
-    "prestart": "npm run get-data",
-    "start": "parcel src/index.html",
+    "start": "node $npm_package_main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wbkd/KanbanCMS.git"
+    "url": "git+https://github.com/wbkd/staticms.git"
   },
   "keywords": [
     "static",
@@ -32,17 +26,13 @@
   "author": "g-div",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wbkd/KanbanCMS/issues"
+    "url": "https://github.com/wbkd/staticms/issues"
   },
-  "homepage": "https://github.com/wbkd/KanbanCMS#readme",
+  "homepage": "https://github.com/wbkd/staticms#readme",
   "dependencies": {
-    "make-dir": "^1.3.0",
-    "meow": "^5.0.0"
-  },
-  "devDependencies": {
     "axios": "^0.18.0",
-    "nconf": "^0.10.0",
-    "parcel-bundler": "^1.8.1",
-    "rimraf": "^2.6.2"
+    "make-dir": "^1.3.0",
+    "meow": "^5.0.0",
+    "nconf": "^0.10.0"
   }
 }
