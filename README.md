@@ -2,6 +2,8 @@
 
 /!\ WIP /!\
 
+![dia](https://i.imgur.com/o1IGCDT.png)
+
 A tool to fetch remote API data and store them locally as static JSON files.
 
 With staticms you can for example use Trello as a redactional UI and content managment system. You can transform a Trello board into a static website, like for example a blog. Every change on your board will trigger a new build process using Webhooks. The build contains the static files you can deploy somewhere to host your static website.
