@@ -1,73 +1,31 @@
-const fs = require('fs');
 const path = require('path');
-const mkdir = require('make-dir');
-const axios = require('axios');
-const nconf = require('nconf');
-const defaults = require('../defaults');
-
-// read config hierarchically from:
-nconf.argv()          // cli arguments
-  .env({              // env variables
-    separator: '__',  // separator for nested values
-    lowerCase: true   // convert to lowercase
-  })
-  .file({ file: 'config.json' })  // config.json file
-  .defaults(defaults)             // fallback to the default
-  .required(['api:key', 'api:token', 'api:list']);  // required fields
-
-const config = nconf.get();
+const config = require('./lib/config');
+const request = require('./lib/request');
+const Writer = require('./lib/writeJSON');
 
 module.exports = async function main() {
   const { dest } = config;
+  const writer = new Writer(config.dest.root);
 
   // get all entries sending a HTTP request
-  const data = await requestData();
-  writeToFile(dest.all, data);
+  const data = await request(config);
+  writer.writeToFile(dest.all, data);
 
   // get all labels (tags) in data
   const labelsList = getLabels(data);
-  writeToFile(dest.tags, labelsList);
+  writer.writeToFile(dest.tags, labelsList);
 
   // write a file with all entries for each label
   for (const label of labelsList) {
     const matchIds = ({id}) => id === label.id;
     const filterEntries = ({ labels }) => labels.some(matchIds);
     const current = data.filter(filterEntries);
-    writeToFile(path.join(dest.tag, `${label.name}.json`), current);
+    writer.writeToFile(path.join(dest.tag, `${label.name}.json`), current);
   }
 
   // write a file for each entry
   for (const entry of data) {
-    writeToFile(path.join(dest.post, `${entry.name}.json`), entry);
-  }
-}
-
-// helper to write JSON files to the provided location inside the root folder
-const writeToFile = async (location, data) => {
-  const fullPath = path.resolve(config.dest.root, location);
-  try {
-    await mkdir(path.dirname(fullPath));
-    fs.writeFileSync(fullPath, JSON.stringify(data));
-  } catch (err) {
-    throw new Error(`Error writing ${fullPath}`);
-  }
-}
-
-const requestData = async() => {
-  const { fields } = config;
-  const { key, token } = config.api;
-  const request = {
-    method: 'get',
-    baseURL: config.api.url,
-    url: `lists/${config.api.list}/cards`,
-    params: Object.assign({}, {...fields }, { key }, { token })
-  };
-
-  try {
-    const apiResponse = await axios.request(request);
-    return apiResponse.data;
-  } catch (err) {
-    throw new Error(`Error requesting ${config.api.url}`);
+    writer.writeToFile(path.join(dest.post, `${entry.name}.json`), entry);
   }
 }
 
@@ -78,4 +36,3 @@ function getLabels(data) {
   const labelsList = [...new Set(fLabels)]; // unique
   return labelsList;
 }
-
