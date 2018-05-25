@@ -3,7 +3,7 @@ const path = require('path');
 const mkdir = require('make-dir');
 
 // helper to write JSON files to the provided location inside the root folder
-class Writer {
+module.exports = class Writer {
   constructor(root) {
     this.root = root;
   }
@@ -17,6 +17,4 @@ class Writer {
       throw new Error(`Error writing ${fullPath}`);
     }
   }
-}
-
-module.exports = Writer;
+};

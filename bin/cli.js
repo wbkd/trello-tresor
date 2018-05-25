@@ -2,7 +2,7 @@
 const meow = require('meow');
 const getData = require('..');
 
-const cli = meow(`
+meow(`
   Usage
   $ staticms
   Run staticms

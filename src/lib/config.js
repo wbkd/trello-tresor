@@ -7,7 +7,7 @@ nconf.argv()          // cli arguments
     separator: '__',  // separator for nested values
     lowerCase: true   // convert to lowercase
   })
-  .file({ file: 'config.json' })  // config.json file
+  .file({file: 'config.json'})  // config.json file
   .defaults(defaults)             // fallback to the default
   .required(['api:key', 'api:token', 'api:list']);  // required fields
 
