@@ -2,9 +2,9 @@
   "name": "staticms",
   "version": "0.0.1",
   "description": "A tool to fetch remote API data and store them locally as static JSON files",
-  "main": "bin/index.js",
+  "main": "src/index.js",
   "bin": {
-    "staticms": "bin/index.js"
+    "staticms": "bin/cli.js"
   },
   "scripts": {
     "start": "node $npm_package_main",

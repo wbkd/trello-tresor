@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const meow = require('meow');
 const mkdir = require('make-dir');
 const axios = require('axios');
 const nconf = require('nconf');
@@ -18,7 +17,7 @@ nconf.argv()          // cli arguments
 
 const config = nconf.get();
 
-async function main() {
+module.exports = async function main() {
   const { dest } = config;
 
   // get all entries sending a HTTP request
@@ -32,7 +31,7 @@ async function main() {
   // write a file with all entries for each label
   for (const label of labelsList) {
     const matchIds = ({id}) => id === label.id;
-    const filterEntries = ({ labels }) => labels.some(matchId);
+    const filterEntries = ({ labels }) => labels.some(matchIds);
     const current = data.filter(filterEntries);
     writeToFile(path.join(dest.tag, `${label.name}.json`), current);
   }
@@ -80,23 +79,3 @@ function getLabels(data) {
   return labelsList;
 }
 
-const cli = meow(`
-  Usage
-  $ staticms
-  Run staticms
-
-  $ staticms --help
-  Print this help message
-
-  $ staticms --version
-  Print the current version
-
-  Examples
-  $ staticms --api.key=XXX --api.token=XXX --api.list=XXX
-
-  Run the script to request the remote JSON files and save
-  them locally.
-  You can alternatively pass the configuration options as
-  environment variables or writing them to config.json.
-  See the online documentation for further information
-`);
