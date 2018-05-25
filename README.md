@@ -1,8 +1,5 @@
 # staticms
-
-/!\ WIP /!\
-
-![dia](https://i.imgur.com/o1IGCDT.png)
+⚠️ WIP ⚠️
 
 A tool to fetch remote API data and store them locally as static JSON files.
 
@@ -13,10 +10,9 @@ With staticms you can for example use Trello as a redactional UI and content man
 This script is responsible to read a remote API (at the moment Trello is supported) and save the results locally as static JSON files, in a folder structure that allow to consume the data as a API endpoints.
 The static files can be either copied in the client build folder or hosted somewhere else, so that the client can then consume the data in a RESTful way.
 
-Setting up Continous Delivery it is then possible to configure a Webhook to trigger a new build when the content served from you API is changed:
-```
-Outgoing Webhook: API (e.g. Trello) -> Incoming Webhook: CI/CD (build)
-```
+Setting up Continous Delivery it is then possible to configure a Webhook to trigger a new build when the content served from you API is changed.
+
+![dia](https://i.imgur.com/o1IGCDT.png)
 
 This approach will allow your codebase to be entirely static and serverless, but will also have the advantages of a dynamic content management system, as your site will be automatically updated when the content provided by your third-party API changes.
 
