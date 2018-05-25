@@ -12,7 +12,9 @@ The static files can be either copied in the client build folder or hosted somew
 
 Setting up Continous Delivery it is then possible to configure a Webhook to trigger a new build when the content served from you API is changed.
 
-![dia](https://i.imgur.com/o1IGCDT.png)
+<p align="center" >
+    <img src="https://i.imgur.com/o1IGCDT.png">
+</p>
 
 This approach will allow your codebase to be entirely static and serverless, but will also have the advantages of a dynamic content management system, as your site will be automatically updated when the content provided by your third-party API changes.
 
