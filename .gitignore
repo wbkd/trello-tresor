@@ -3,5 +3,7 @@ dist/
 .cache/
 *.log
 .env
+config.json
 
 src/static/
+static/
