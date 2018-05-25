@@ -5,38 +5,46 @@ const axios = require('axios');
 const nconf = require('nconf');
 const defaults = require('../defaults');
 
-nconf.argv()
-  .env({
-    separator: '__',
-    lowerCase: true
+// read config hierarchically from:
+nconf.argv()          // cli arguments
+  .env({              // env variables
+    separator: '__',  // separator for nested values
+    lowerCase: true   // convert to lowercase
   })
-  .file({ file: 'config.json' })
-  .defaults(defaults)
-  .required(['api:key', 'api:token', 'api:list']);
+  .file({ file: 'config.json' })  // config.json file
+  .defaults(defaults)             // fallback to the default
+  .required(['api:key', 'api:token', 'api:list']);  // required fields
 
 const config = nconf.get();
 
 async function main() {
-  // get all
-  const data = await writeResponseToFile(config.dest.all);
+  const { dest } = config;
 
-  // get labels
+  // helper to write JSON files to the provided location inside the root folder
+  const writeToFile = (location, data) =>
+    fs.writeFileSync(path.resolve(dest.root, location), JSON.stringify(data));
+
+  // get all entries sending a HTTP request
+  const data = await requestData();
+  writeToFile(dest.all, data);
+
+  // get all labels (tags) in data
   const labelsList = getLabels(data);
-  fs.writeFileSync(path.resolve(config.dest.root, config.dest.tags), JSON.stringify(labelsList));
+  writeToFile(dest.tags, labelsList);
 
-  // get by label
+  // write a file with all entries for each label
   for (const label of labelsList) {
     const current = data.filter(({ labels }) => labels.some(({id}) => id === label.id));
-    fs.writeFileSync(path.resolve(config.dest.root, config.dest.tag, `${label.name}.json`), JSON.stringify(current));
+    writeToFile(path.join(dest.tag, `${label.name}.json`), current);
   }
 
-  // get by id
+  // write a file for each entry
   for (const entry of data) {
-    fs.writeFileSync(path.resolve(config.dest.root, config.dest.post, `${entry.name}.json`), JSON.stringify(entry));
+    writeToFile(path.join(dest.post, `${entry.name}.json`), entry);
   }
 }
 
-async function writeResponseToFile(name) {
+async function requestData() {
   const { fields } = config;
   const { key, token } = config.api;
   const request = {
@@ -47,7 +55,6 @@ async function writeResponseToFile(name) {
   };
 
   const apiResponse = await axios.request(request);
-  fs.writeFileSync(path.resolve(config.dest.root, name), JSON.stringify(apiResponse.data));
   return apiResponse.data;
 }
 
