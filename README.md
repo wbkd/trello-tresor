@@ -1,7 +1,7 @@
 # staticms
 ⚠️ WIP ⚠️
 
-A tool to fetch **remote API data** and store them locally as **static** JSON files.
+A tool to fetch **remote API** data and store them locally as **static** JSON files.
 
 With *staticms* you can for example use Trello as redactional UI and content managment system. It will transform a Trello board into a set of static JSON files ready to be served as API for a static website.
 
@@ -27,7 +27,7 @@ npm install staticms
 
 ### Usage
 
-You will need to copy the **API Key** and the **API Token** from your [Trello App Key](https://trello.com/app-key) to the `config.json` file in the project root folder. An example config file will look like this (see [options](#options)):
+You will need to copy the **API Key** and the **API Token** from your [Trello App Key](https://trello.com/app-key) to the `config.json` file in the project root folder. An example **config** file will look like this (see [options](#options)):
 
 ```JSON
 {
@@ -54,7 +54,7 @@ You will need to copy the **API Key** and the **API Token** from your [Trello Ap
 }
 ```
 
-And run the following command to download the JSON files:
+And **run** the following command to download the JSON files:
 ```sh
 staticms
 ```
@@ -64,7 +64,7 @@ The config options can be also passed as environment variables or as command-lin
 API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s staticms
 ```
 
-or
+**or**
 
 ```sh
 staticms --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
@@ -92,7 +92,7 @@ The options you can add to the `config.json` file or pass via command-line/envir
 | fields.attachment_fields | The attachment fields to be displayed | `["previews", "url"]`       |
 
 
-To get further information about the fields you can select, please referr to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.
+To get **further information** about the fields you can select, please referr to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.
 
 #### npx
 
