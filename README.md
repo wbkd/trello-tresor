@@ -18,14 +18,14 @@ Setting up Continous Delivery it is then possible to configure a Webhook to trig
 
 This approach will allow your codebase to be entirely **static** and **serverless**, but will also have the advantages of a dynamic content management system, as your site will be **automatically updated** when the content provided by your third-party API changes.
 
-### Installation
+## Installation
 
 Run:
 ```sh
 npm install staticms
 ```
 
-### Usage
+## Usage
 
 You will need to copy the **API Key** and the **API Token** from your [Trello App Key](https://trello.com/app-key) to the `config.json` file in the project root folder. An example **config** file will look like this (see [options](#options)):
 
@@ -70,7 +70,7 @@ API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffn
 staticms --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
 ```
 
-#### Options
+### Options
 
 The options you can add to the `config.json` file or pass via command-line/environment variable are:
 
@@ -94,7 +94,7 @@ The options you can add to the `config.json` file or pass via command-line/envir
 
 To get **further information** about the fields you can select, please referr to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.
 
-#### npx
+### npx
 
 This module is suitable to be used with `npx`, so that you don't even need to install the module and add it to your package dependencies.
 Just add `npx staticms` to your `prebuild` hook in the `package.json` of your module:
@@ -111,7 +111,7 @@ Just add `npx staticms` to your `prebuild` hook in the `package.json` of your mo
 
 **Done!**
 
-#### Help
+### Help
 
 Running `staticms --help` will print the following usage manual:
 ```sh
