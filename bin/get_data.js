@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const mkdir = require('make-dir');
 const axios = require('axios');
 const nconf = require('nconf');
 const defaults = require('../defaults');
@@ -19,10 +20,6 @@ const config = nconf.get();
 
 async function main() {
   const { dest } = config;
-
-  // helper to write JSON files to the provided location inside the root folder
-  const writeToFile = (location, data) =>
-    fs.writeFileSync(path.resolve(dest.root, location), JSON.stringify(data));
 
   // get all entries sending a HTTP request
   const data = await requestData();
@@ -44,7 +41,18 @@ async function main() {
   }
 }
 
-async function requestData() {
+// helper to write JSON files to the provided location inside the root folder
+const writeToFile = async (location, data) => {
+  const fullPath = path.resolve(dest.root, location);
+  try {
+    await mkdir(path.dirname(fullPath));
+    fs.writeFileSync(fullPath, JSON.stringify(data));
+  } catch (err) {
+    throw new Error(`Error writing ${fullPath}`);
+  }
+}
+
+const requestData = async() => {
   const { fields } = config;
   const { key, token } = config.api;
   const request = {
@@ -54,8 +62,12 @@ async function requestData() {
     params: Object.assign({}, {...fields }, { key }, { token })
   };
 
-  const apiResponse = await axios.request(request);
-  return apiResponse.data;
+  try {
+    const apiResponse = await axios.request(request);
+    return apiResponse.data;
+  } catch (err) {
+    throw new Error(`Error requesting ${config.api.url}`);
+  }
 }
 
 function getLabels(data) {
@@ -66,4 +78,4 @@ function getLabels(data) {
 }
 
 main()
-  .catch(console.error);
+  .catch(err => console.error(err.message));
