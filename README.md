@@ -87,7 +87,7 @@ The options you can add to the `config.json` file or pass via command-line/envir
 | dest.tag    | The folder name where all single tags are saved   | `"tag"`                       |
 | fields.fields | The post fields to be displayed                 | `["id", "name", "dateLastActivity", "desc", "idList", "labels"]` |
 | fields.members | Display or not user information (true or false) | `true`                      |
-| fields.member_fields | The user fields to be displayed           | `["fullName", "bio"]'       |
+| fields.member_fields | The user fields to be displayed           | `["fullName", "bio"]`       |
 | fields.attachments | Display or not attachments information (true or false) | `true`           |
 | fields.attachment_fields | The attachment fields to be displayed | `["previews", "url"]`       |
 
