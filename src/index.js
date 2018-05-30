@@ -32,7 +32,18 @@ module.exports = async () => {
   }
 
   // write a file for each entry
-  for (const entry of data) {
+  for (const index in data) {
+    const i = parseInt(index);
+    const prev = data[i - 1];
+    const entry = data[i];
+    const next = data[i + 1];
+    if (prev) {
+      entry.prev = prev.id;
+    }
+    if (next) {
+      entry.next = next.id;
+    }
+
     writer.writeToFile(path.join(dest.post, `${entry.id}.json`), entry);
   }
 };
