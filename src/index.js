@@ -3,6 +3,7 @@ const config = require('./lib/config');
 const request = require('./lib/request');
 const Writer = require('./lib/writeJSON');
 const paginate = require('./lib/paginate');
+const getLabels = require('./lib/getLabels');
 
 module.exports = async () => {
   const {dest, pagination} = config;
@@ -35,11 +36,3 @@ module.exports = async () => {
     writer.writeToFile(path.join(dest.post, `${entry.id}.json`), entry);
   }
 };
-
-function getLabels(data) {
-  const extractLabels = ({labels}) => labels;
-  const allLabels = data.map(extractLabels);
-  const fLabels = Array.prototype.concat(...allLabels); // flatten
-  const labelsList = [...new Set(fLabels)]; // unique
-  return labelsList;
-}
