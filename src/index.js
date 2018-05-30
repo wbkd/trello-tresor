@@ -49,17 +49,19 @@ function getLabels(data) {
 function paginate(data) {
   const {pagination} = config;
   const totalCount = data.length;
-  const numberOfPages = Math.ceil(totalCount / pagination.entryPerPage);
+  const numberOfPages = Math.ceil(totalCount / pagination.entriesPerPage);
 
   const pages = [];
-  for (const i of [...Array(numberOfPages).keys()]) {
-    const start = i * pagination.entryPerPage;
-    const end = start + pagination.entryPerPage;
-    const page = data.slice(start, end);
-    page.totalCount = data.length;
-    page.numberOfPages = Math.ceil(page.totalCount / pagination.entryPerPage);
-    page.currentPage = i;
-    pages.push(page);
+  for (let currentPage = 0; currentPage < numberOfPages; currentPage++) {
+    const start = currentPage * pagination.entriesPerPage;
+    const end = start + pagination.entriesPerPage;
+    const res = {
+      totalCount,
+      numberOfPages,
+      currentPage,
+      data: data.slice(start, end)
+    };
+    pages.push(res);
   }
   return pages;
 }

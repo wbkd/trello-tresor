@@ -17,6 +17,6 @@
         "attachment_fields": ["previews", "url"]
     },
     "pagination": {
-        "entryPerPage": 20
+        "entriesPerPage": 20
     }
 }
