@@ -6,15 +6,8 @@ module.exports = data => {
   return uniqueLabels;
 };
 
-const unique = labels => {
-  const foundLabels = [];
-  return labels.filter(label => {
-    const found = foundLabels.find(foundLabel => foundLabel.id === label.id);
-    if (!found) {
-      foundLabels.push(label);
-      return label;
-    } else {
-      return;
-    }
-  });
-}
+const unique = labels => labels.reduce((prev, curr) => {
+  const found = prev.find(label => label.id !== curr.id);
+  if (!found) prev.push(curr);
+  return prev;
+}, []);
