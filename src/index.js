@@ -2,6 +2,7 @@ const path = require('path');
 const config = require('./lib/config');
 const request = require('./lib/request');
 const Writer = require('./lib/writeJSON');
+const images = require('./lib/images');
 const paginate = require('./lib/paginate');
 const getLabels = require('./lib/getLabels');
 
@@ -44,6 +45,7 @@ module.exports = async () => {
       entry.next = next.id;
     }
 
-    writer.writeToFile(path.join(dest.post, `${entry.id}.json`), entry);
+    const transformed = await images(entry, path.join(dest.root, dest.images));
+    writer.writeToFile(path.join(dest.post, `${entry.id}.json`), transformed);
   }
 };

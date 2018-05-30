@@ -8,7 +8,8 @@
         "tags": "tags",
         "tagList": "tags.json",
         "post": "post",
-        "tag": "tag"
+        "tag": "tag",
+        "images": "images"
     },
     "fields": {
         "fields": ["id", "name", "dateLastActivity", "desc", "idList", "labels"],
