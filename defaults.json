@@ -6,6 +6,7 @@
         "root": "static",
         "all": "pages",
         "tags": "tags",
+        "tagList": "tags.json",
         "post": "post",
         "tag": "tag"
     },

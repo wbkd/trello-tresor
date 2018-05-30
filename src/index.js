@@ -16,10 +16,7 @@ module.exports = async () => {
 
   // get all labels (tags) in data
   const labelsList = getLabels(data);
-  const labelsPages = paginate(labelsList);
-  for (const page of labelsPages) {
-    writer.writeToFile(path.join(dest.tags, `${page.currentPage}.json`), page);
-  }
+  writer.writeToFile(dest.tagList, labelsList);
 
   // write a file with all entries for each label
   for (const label of labelsList) {
@@ -27,7 +24,7 @@ module.exports = async () => {
     const filterEntries = ({labels}) => labels.some(matchIds);
     const current = data.filter(filterEntries);
     const paginateCurrent = paginate(current);
-    for (const page of labelsPages) {
+    for (const page of paginateCurrent) {
       writer.writeToFile(path.join(dest.tags, `${label.name}`, `${page.currentPage}.json`), page);
     }
   }
