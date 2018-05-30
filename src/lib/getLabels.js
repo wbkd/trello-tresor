@@ -7,7 +7,7 @@ module.exports = data => {
 };
 
 const unique = labels => labels.reduce((prev, curr) => {
-  const found = prev.find(label => label.id !== curr.id);
+  const found = prev.find(label => label.id === curr.id);
   if (!found) prev.push(curr);
   return prev;
 }, []);
