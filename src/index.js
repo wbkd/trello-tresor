@@ -25,7 +25,7 @@ module.exports = async () => {
 
   // write a file for each entry
   for (const entry of data) {
-    writer.writeToFile(path.join(dest.post, `${entry.name}.json`), entry);
+    writer.writeToFile(path.join(dest.post, `${entry.id}.json`), entry);
   }
 };
 
