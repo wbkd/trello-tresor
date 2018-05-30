@@ -3,7 +3,6 @@ module.exports = data => {
   const allLabels = data.map(extractLabels);
   const fLabels = Array.prototype.concat(...allLabels); // flatten
   const uniqueLabels = unique(fLabels);
-  console.log(uniqueLabels)
   return uniqueLabels;
 };
 
