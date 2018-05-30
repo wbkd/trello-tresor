@@ -2,14 +2,15 @@ const path = require('path');
 const config = require('./lib/config');
 const request = require('./lib/request');
 const Writer = require('./lib/writeJSON');
+const paginate = require('./lib/paginate');
 
 module.exports = async () => {
-  const {dest} = config;
+  const {dest, pagination} = config;
   const writer = new Writer(dest.root);
 
   // get all entries sending a HTTP request
   const data = await request(config);
-  const pages = paginate(data);
+  const pages = paginate(data, pagination);
   for (const page of pages) {
     writer.writeToFile(path.join(dest.all, `${page.currentPage}.json`), page);
   }
@@ -23,7 +24,7 @@ module.exports = async () => {
     const matchIds = ({id}) => id === label.id;
     const filterEntries = ({labels}) => labels.some(matchIds);
     const current = data.filter(filterEntries);
-    const paginateCurrent = paginate(current);
+    const paginateCurrent = paginate(current, pagination);
     for (const page of paginateCurrent) {
       writer.writeToFile(path.join(dest.tags, `${label.name}`, `${page.currentPage}.json`), page);
     }
@@ -41,24 +42,4 @@ function getLabels(data) {
   const fLabels = Array.prototype.concat(...allLabels); // flatten
   const labelsList = [...new Set(fLabels)]; // unique
   return labelsList;
-}
-
-function paginate(data) {
-  const {pagination} = config;
-  const totalCount = data.length;
-  const numberOfPages = Math.ceil(totalCount / pagination.entriesPerPage);
-
-  const pages = [];
-  for (let currentPage = 0; currentPage < numberOfPages; currentPage++) {
-    const start = currentPage * pagination.entriesPerPage;
-    const end = start + pagination.entriesPerPage;
-    const res = {
-      totalCount,
-      numberOfPages,
-      currentPage,
-      data: data.slice(start, end)
-    };
-    pages.push(res);
-  }
-  return pages;
 }
