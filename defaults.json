@@ -4,8 +4,8 @@
     },
     "dest": {
         "root": "static",
-        "all": "all.json",
-        "tags": "tags.json",
+        "all": "pages",
+        "tags": "tags",
         "post": "post",
         "tag": "tag"
     },
@@ -15,5 +15,8 @@
         "member_fields": ["fullName", "bio"],
         "attachments": true,
         "attachment_fields": ["previews", "url"]
+    },
+    "pagination": {
+        "entryPerPage": 20
     }
 }

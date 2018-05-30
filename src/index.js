@@ -5,22 +5,31 @@ const Writer = require('./lib/writeJSON');
 
 module.exports = async () => {
   const {dest} = config;
-  const writer = new Writer(config.dest.root);
+  const writer = new Writer(dest.root);
 
   // get all entries sending a HTTP request
   const data = await request(config);
-  writer.writeToFile(dest.all, data);
+  const pages = paginate(data);
+  for (const page of pages) {
+    writer.writeToFile(path.join(dest.all, `${page.currentPage}.json`), page);
+  }
 
   // get all labels (tags) in data
   const labelsList = getLabels(data);
-  writer.writeToFile(dest.tags, labelsList);
+  const labelsPages = paginate(labelsList);
+  for (const page of labelsPages) {
+    writer.writeToFile(path.join(dest.tags, `${page.currentPage}.json`), page);
+  }
 
   // write a file with all entries for each label
   for (const label of labelsList) {
     const matchIds = ({id}) => id === label.id;
     const filterEntries = ({labels}) => labels.some(matchIds);
     const current = data.filter(filterEntries);
-    writer.writeToFile(path.join(dest.tag, `${label.name}.json`), current);
+    const paginateCurrent = paginate(current);
+    for (const page of labelsPages) {
+      writer.writeToFile(path.join(dest.tags, `${label.name}`, `${page.currentPage}.json`), page);
+    }
   }
 
   // write a file for each entry
@@ -35,4 +44,22 @@ function getLabels(data) {
   const fLabels = Array.prototype.concat(...allLabels); // flatten
   const labelsList = [...new Set(fLabels)]; // unique
   return labelsList;
+}
+
+function paginate(data) {
+  const {pagination} = config;
+  const totalCount = data.length;
+  const numberOfPages = Math.ceil(totalCount / pagination.entryPerPage);
+
+  const pages = [];
+  for (const i of [...Array(numberOfPages).keys()]) {
+    const start = i * pagination.entryPerPage;
+    const end = start + pagination.entryPerPage;
+    const page = data.slice(start, end);
+    page.totalCount = data.length;
+    page.numberOfPages = Math.ceil(page.totalCount / pagination.entryPerPage);
+    page.currentPage = i;
+    pages.push(page);
+  }
+  return pages;
 }
