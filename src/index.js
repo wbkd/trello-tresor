@@ -24,7 +24,7 @@ module.exports = async () => {
   // write a file with all entries for each label
   for (const label of labelsList) {
     const matchIds = ({id}) => id === label.id;
-    const filterEntries = ({labels}) => labels.some(matchIds);
+    const filterEntries = ({labels}) => labels && labels.some(matchIds);
     const current = data.filter(filterEntries);
     const paginateCurrent = paginate(current, pagination);
     for (const page of paginateCurrent) {
