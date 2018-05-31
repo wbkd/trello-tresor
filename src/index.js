@@ -45,7 +45,7 @@ module.exports = async () => {
       entry.next = next.id;
     }
 
-    const transformed = await images(entry, path.join(dest.root, dest.images));
+    const transformed = images(entry, path.join(dest.root, dest.images));
     writer.writeToFile(path.join(dest.post, `${entry.id}.json`), transformed);
   }
 };
