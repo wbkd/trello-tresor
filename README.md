@@ -89,13 +89,13 @@ The options you can add to the `config.json` file or pass via command-line/envir
 | dest.tags   | The filename of the JSON containings all tags     | `"tags.json"`                 |
 | dest.post   | The folder name where all single posts are saved  | `"post"`                      |
 | dest.tag    | The folder name where all single tags are saved   | `"tag"`                       |
-| dest.images | The folder name where all images will be stored   | false (don't download images) |
+| dest.images | The folder name where all images will be stored   | `false` (don't download images) |
 | fields.fields | The post fields to be displayed                 | `["id", "name", "dateLastActivity", "desc", "idList", "labels"]` |
 | fields.members | Display or not user information (true or false) | `true`                      |
 | fields.member_fields | The user fields to be displayed           | `["fullName", "bio"]`       |
 | fields.attachments | Display or not attachments information (true or false) | `true`           |
 | fields.attachment_fields | The attachment fields to be displayed | `["previews", "url"]`       |
-| pagination.entriesPerPage | The number of entries in a single JSON | 20                        |
+| pagination.entriesPerPage | The number of entries in a single JSON | `20`                        |
 
 
 To get **further information** about the fields you can select, please referr to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.
