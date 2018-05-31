@@ -8,7 +8,7 @@ module.exports = async config => {
   if (typeof list === 'string') {
     return request([list]);
   } else {
-    return request(list);
+    return request(list.reverse());
   }
 };
 
