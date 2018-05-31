@@ -2,7 +2,8 @@ module.exports = data => {
   const extractLabels = ({labels}) => labels;
   const allLabels = data.map(extractLabels);
   const fLabels = Array.prototype.concat(...allLabels); // flatten
-  const uniqueLabels = unique(fLabels);
+  const dLabels = fLabels.filter(label => typeof label !== 'undefined');
+  const uniqueLabels = unique(dLabels);
   return uniqueLabels;
 };
 
