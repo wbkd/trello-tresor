@@ -33,19 +33,27 @@ module.exports = async () => {
   }
 
   // write a file for each entry
-  for (const index in data) {
-    const i = parseInt(index);
-    const prev = data[i - 1];
-    const entry = data[i];
-    const next = data[i + 1];
-    if (prev) {
-      entry.prev = prev.id;
-    }
-    if (next) {
-      entry.next = next.id;
+  for (const [index, value] of data.entries()) {
+    let entry = getPrevAndNext(value, index, data);
+
+    if (dest.images) {
+      entry = images(entry, path.join(dest.root, dest.images));
     }
 
-    const transformed = images(entry, path.join(dest.root, dest.images));
-    writer.writeToFile(path.join(dest.post, `${entry.id}.json`), transformed);
+    writer.writeToFile(path.join(dest.post, `${entry.id}.json`), entry);
   }
 };
+
+const getPrevAndNext = (entry, index, data) => {
+  const i = parseInt(index);
+  const prev = data[i - 1];
+  const next = data[i + 1];
+  if (prev) {
+    entry.prev = prev.id;
+  }
+  if (next) {
+    entry.next = next.id;
+  }
+
+  return entry;
+}
