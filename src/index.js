@@ -33,11 +33,11 @@ module.exports = async () => {
   }
 
   // write a file for each entry
-  for (const [index, value] of data.entries()) {
+  for (const [index, value] of await data.entries()) {
     let entry = getPrevAndNext(value, index, data);
 
     if (dest.images) {
-      entry = images(entry, path.join(dest.root, dest.images));
+      entry = await images(entry, path.join(dest.root, dest.images));
     }
 
     writer.writeToFile(path.join(dest.post, `${entry.id}.json`), entry);

@@ -4,13 +4,15 @@ const path = require('path');
 const axios = require('axios');
 const mkdir = require('make-dir');
 
-module.exports = (entry, dest) => {
-  entry.attachments = entry.attachments.map(async attachment => {
-    const previews = attachment.previews.map(preview => requestAndWrite(preview, dest));
+module.exports = async (entry, dest) => {
+  const attachments = entry.attachments.map(async attachment => {
+    const previews = attachment.previews.map(async preview => await requestAndWrite(preview, dest));
+    attachment.url = url.parse(attachment.url).path;
     attachment.previews = await Promise.all(previews);
     return attachment;
   });
 
+  entry.attachments = await Promise.all(attachments);
   return entry;
 }
 
