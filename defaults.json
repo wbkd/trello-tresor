@@ -9,7 +9,7 @@
         "tagList": "tags.json",
         "post": "post",
         "tag": "tag",
-        "images": "images"
+        "images": false
     },
     "fields": {
         "fields": ["id", "name", "dateLastActivity", "desc", "idList", "labels"],
