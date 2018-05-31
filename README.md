@@ -83,8 +83,8 @@ The options you can add to the `config.json` file or pass via command-line/envir
 | api.url     | The base API url                                  | `"https://api.trello.com/1/"` |
 | api.key     | The API key (**required**)                        |                               |
 | api.token   | The API token (**required**)                      |                               |
-| api.list    | The IDs (as array) of the trello list to watch (**required**) |                               |
-| dest.root   | The folder where all JSON files are saved         | `"static/"`               |
+| api.list    | The IDs (as array) of the trello lists to watch (**required**) |                  |
+| dest.root   | The folder where all JSON files are saved         | `"static/"`                   |
 | dest.all    | The filename of the JSON containings all entries  | `"all.json"`                  |
 | dest.tags   | The filename of the JSON containings all tags     | `"tags.json"`                 |
 | dest.post   | The folder name where all single posts are saved  | `"post"`                      |
