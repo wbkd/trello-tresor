@@ -26,7 +26,6 @@ const requests = (listIds, url, fields, key, token) =>
       const apiResponse = await axios.request(req);
       return collection.concat(apiResponse.data);
     } catch (err) {
-      console.log(err);
       throw new Error(`Error requesting ${url}`);
     }
   }, Promise.resolve([]));
