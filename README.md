@@ -1,13 +1,13 @@
-# staticms
+# Tresor
 ⚠️ WIP ⚠️
 
-A tool to fetch **remote API** data and store them locally as **static** JSON files.
+A tool to fetch **Trello API** data and store them locally as **static** JSON files.
 
-With *staticms* you can for example use Trello as redactional UI and content managment system. It will transform a Trello board into a set of static JSON files ready to be served as API for a static website.
+With *Tresor* you can use Trello as redactional UI and content managment system. It will transform a Trello list into a set of static JSON files ready to be served as API for a static website.
 
 ## How it works ?
 
-This script is responsible to read a remote API (at the moment Trello is supported) and save the results locally as static JSON files, in a folder structure that allow to consume the data as API endpoints.
+This script is responsible to read the Trello API and save the results locally as static JSON files, in a folder structure that allow to consume the data as API endpoints.
 The static files can be either copied in the client build folder or hosted somewhere else (CDNs, ...), so that the client can then consume the data in a RESTful way.
 
 Setting up Continous Delivery it is then possible to configure a Webhook to trigger a new build when the content served from you API is changed.
@@ -22,7 +22,7 @@ This approach will allow your codebase to be entirely **static** and **serverles
 
 Run:
 ```sh
-npm install staticms
+npm install tresor
 ```
 
 ## Usage
@@ -60,18 +60,18 @@ You will need to copy the **API Key** and the **API Token** from your [Trello Ap
 
 And **run** the following command to download the JSON files:
 ```sh
-staticms
+tresor
 ```
 
 The config options can be also passed as environment variables or as command-line arguments:
 ```sh
-API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s staticms
+API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s tresor
 ```
 
 **or**
 
 ```sh
-staticms --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
+tresor --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
 ```
 
 ### Options
@@ -103,13 +103,13 @@ To get **further information** about the fields you can select, please referr to
 ### npx
 
 This module is suitable to be used with `npx`, so that you don't even need to install the module and add it to your package dependencies.
-Just add `npx staticms` to your `prebuild` hook in the `package.json` of your module:
+Just add `npx tresor` to your `prebuild` hook in the `package.json` of your module:
 
 ```JSON
 {
   [...]
   "scripts": {
-    "prebuild": "npx staticms",
+    "prebuild": "npx tresor",
   [...]
   }
 }
@@ -119,24 +119,24 @@ Just add `npx staticms` to your `prebuild` hook in the `package.json` of your mo
 
 ### Help
 
-Running `staticms --help` will print the following usage manual:
+Running `tresor --help` will print the following usage manual:
 ```sh
-$ staticms --help
+$ tresor --help
 
   A tool to fetch remote API data and store them locally as static JSON files
 
   Usage
-  $ staticms
-  Run staticms
+  $ tresor
+  Run tresor
 
-  $ staticms --help
+  $ tresor --help
   Print this help message
 
-  $ staticms --version
+  $ tresor --version
   Print the current version
 
   Examples
-  $ staticms --api.key=XXX --api.token=XXX --api.list=XXX
+  $ tresor --api.key=XXX --api.token=XXX --api.list=XXX
 
   Run the script to request the remote JSON files and save
   them locally.
