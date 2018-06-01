@@ -4,19 +4,19 @@ const getData = require('..');
 
 meow(`
   Usage
-  $ staticms
-  Run staticms
+  $ tresor
+  Run tresor
 
-  $ staticms --help
+  $ tresor --help
   Print this help message
 
-  $ staticms --version
+  $ tresor --version
   Print the current version
 
   Examples
-  $ staticms --api.key=XXX --api.token=XXX --api.list=XXX
+  $ tresor --api.key=XXX --api.token=XXX --api.list=XXX
 
-  Run the script to request the remote JSON files and save
+  Run the script to request Trello API data and save
   them locally.
   You can alternatively pass the configuration options as
   environment variables or writing them to config.json.
