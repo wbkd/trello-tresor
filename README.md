@@ -3,11 +3,11 @@
 
 A tool to fetch **Trello API** data and store them locally as **static** JSON files.
 
-With *Tresor* you can use Trello as redactional UI and content managment system. It will transform a Trello list into a set of static JSON files ready to be served as API for a static website.
+With *Tresor* you can use Trello as a redactional UI and content managment system. It will transform a Trello list into a set of static JSON files ready to be served as an API for a static website.
 
 ## How it works ?
 
-This script is responsible to read the Trello API and save the results locally as static JSON files, in a folder structure that allow to consume the data as API endpoints.
+Tresor is responsible for reading the Trello API and saves the results locally as static JSON files, in a folder structure that allows to consume the data as API endpoints.
 The static files can be either copied in the client build folder or hosted somewhere else (CDNs, ...), so that the client can then consume the data in a RESTful way.
 
 Setting up Continous Delivery it is then possible to configure a Webhook to trigger a new build when the content served from you API is changed.
@@ -16,7 +16,7 @@ Setting up Continous Delivery it is then possible to configure a Webhook to trig
     <img src="https://i.imgur.com/o1IGCDT.png">
 </p>
 
-This approach will allow your codebase to be entirely **static** and **serverless**, but will also have the advantages of a dynamic content management system, as your site will be **automatically updated** when the content provided by your third-party API changes.
+This approach will allow your codebase to be entirely **static** and **serverless**, but also has the advantages of a dynamic content management system, as your site will be **automatically updated** when the content changes.
 
 ## Installation
 
@@ -58,17 +58,17 @@ You will need to copy the **API Key** and the **API Token** from your [Trello Ap
 }
 ```
 
-And **run** the following command to download the JSON files:
+Run the following command to **download the JSON files**:
 ```sh
 tresor
 ```
 
-The config options can be also passed as environment variables or as command-line arguments:
+The config options can be also passed as environment variables:
 ```sh
 API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s tresor
 ```
 
-**or**
+or as command-line arguments:
 
 ```sh
 tresor --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 --api.list=124f9hue2983232rj32052s
@@ -76,7 +76,7 @@ tresor --api.key=asenoiuwqeWNEUfnewoeFNWQetr3295023rer --api.token=ASnqoiwqenmNE
 
 ### Options
 
-The options you can add to the `config.json` file or pass via command-line/environment variable are:
+The options you can add to the `config.json` file or pass via command-line/environment variables are:
 
 | Name        | Description                                       | Default                       |
 |-------------|---------------------------------------------------|-------------------------------|
@@ -98,11 +98,11 @@ The options you can add to the `config.json` file or pass via command-line/envir
 | pagination.entriesPerPage | The number of entries in a single JSON | `20`                        |
 
 
-To get **further information** about the fields you can select, please referr to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.
+To get **further information** about the fields you can select, please refer to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.
 
 ### npx
 
-This module is suitable to be used with `npx`, so that you don't even need to install the module and add it to your package dependencies.
+This module is suitable to be used with `npx`, so that you don't need to install the module and add it to your package dependencies.
 Just add `npx tresor` to your `prebuild` hook in the `package.json` of your module:
 
 ```JSON
