@@ -5,6 +5,18 @@ A tool to fetch data from the **Trello API** and store them locally as **static*
 
 With *Tresor* you can use Trello as a redactional UI and content managment system. It will transform a Trello list into a set of static JSON files ready to be served as an API for a static website.
 
+## Why ?
+
+This is a tool to build your next [JAMstack](https://jamstack.org/) project, allowing your codebase to be entirely **static** and **serverless**, but also has the advantages of a content management system, as your site will be **automatically updated** when the content changes. A static files codebase can be entirely hosted on a CDN, reducing infrastructure costs and increasing performance and availability.
+
+Trello offers a very **simple** UI and a well designed API, with all necessary features to manage the content behind a small static website, a blog or a single page application:
+- Markdown support
+- Attachments: files upload, render images in different resolutions and render thumbnails
+- Labels: can be used as tags or categories
+- Members: can be used to assign an entry to an author
+- Emoji support !
+- ...
+
 ## How it works ?
 
 Tresor reads the Trello API and saves the results locally as static JSON files, in a folder structure that allows to consume the data as HTTP API endpoints.
@@ -15,18 +27,6 @@ Setting up Continous Delivery it is then possible to configure a Webhook to trig
 <p align="center" >
     <img src="https://i.imgur.com/o1IGCDT.png">
 </p>
-
-## Why ?
-
-This is a tool to build your next [JAMstack](https://jamstack.org/) project, allowing your codebase to be entirely **static** and **serverless**, but also has the advantages of a dynamic content management system, as your site will be **automatically updated** when the content changes. A static files codebase can be entirely hosted on a CDN, reducing infrastructure costs and increasing performance and availability.
-
-Trello offers a very **simple** UI and a well designed API, with all necessary features to manage the content behind a small static website, a blog or a single page application:
-- Markdown support
-- Attachments: files upload, render images in different resolutions and render thumbnails
-- Labels: can be used as tags or categories
-- Members: can be used to assign an entry to an author
-- Emoji support !
-- ...
 
 ## Installation
 (Skip this using [npx](#npx))
