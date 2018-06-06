@@ -1,14 +1,14 @@
 # Tresor
 ⚠️ WIP ⚠️
 
-A tool to fetch **Trello API** data and store them locally as **static** JSON files.
+A tool to fetch data from the **Trello API** and store them locally as **static** JSON files.
 
 With *Tresor* you can use Trello as a redactional UI and content managment system. It will transform a Trello list into a set of static JSON files ready to be served as an API for a static website.
 
 ## How it works ?
 
-Tresor is responsible for reading the Trello API and saves the results locally as static JSON files, in a folder structure that allows to consume the data as API endpoints.
-The static files can be either copied in the client build folder or hosted somewhere else (CDNs, ...), so that the client can then consume the data in a RESTful way.
+Tresor reads the Trello API and saves the results locally as static JSON files, in a folder structure that allows to consume the data as HTTP API endpoints.
+The static files can be either copied in the client build folder or hosted somewhere else (CDNs, Github Pages, Netlify, ...), so that the client can then consume the data in a RESTful way.
 
 Setting up Continous Delivery it is then possible to configure a Webhook to trigger a new build when the content served from you API is changed.
 
@@ -16,9 +16,23 @@ Setting up Continous Delivery it is then possible to configure a Webhook to trig
     <img src="https://i.imgur.com/o1IGCDT.png">
 </p>
 
-This approach will allow your codebase to be entirely **static** and **serverless**, but also has the advantages of a dynamic content management system, as your site will be **automatically updated** when the content changes.
+## Why ?
+
+This is a tool to build your next [JAMstack](https://jamstack.org/) project, allowing your codebase to be entirely **static** and **serverless**, but also has the advantages of a dynamic content management system, as your site will be **automatically updated** when the content changes. A static files codebase can be entirely hosted on a CDN, reducing infrastructure costs and increasing performance and availability.
+Trello offers a very **simple** UI and a very good API, with all necessary features to manage the content behind a small static website, a blog or a single page application:
+- Markdown support
+- Attachments: files upload, render images in different resolutions and render thumbnails
+- Labels: can be used as tags or categories
+- Members: can be used to assign an entry to an author
+- Emoji support !
+- ...
 
 ## Installation
+(Skip this using [npx](#npx))
+
+Requirements:
+- Node.js >= v8
+- npm >= v5
 
 Run:
 ```sh
@@ -27,43 +41,22 @@ npm install tresor
 
 ## Usage
 
-You will need to copy the **API Key** and the **API Token** from your [Trello App Key](https://trello.com/app-key) to the `config.json` file in the project root folder. An example **config** file will look like this (see [options](#options)):
+Requirements:
+- Trello **API Key** and the **API Token**: can be requested [here](https://trello.com/app-key)
+- **ID** of the list (column) to turn into a set of static JSON files. If you want for example to work on the list *Completed Projects* from the board [https://trello.com/b/lGQZunS7/company-overview](https://trello.com/b/lGQZunS7/company-overview), just open the JSON representation at [https://trello.com/b/lGQZunS7.json](https://trello.com/b/lGQZunS7.json) and search for the *Completed Projects* list. You will find the ID in an object like the following: ```{"name":"Completed Projects","id":"55107c98a2dd31ceef12dc3e"}```
 
-```JSON
-{
-    "api": {
-        "url": "https://api.trello.com/1/",
-        "key": "asenoiuwqeWNEUfnewoeFNWQetr3295023rer",
-        "token": "ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543",
-        "list": ["124f9hue2983232rj32052s"]
-    },
-    "dest": {
-        "root": "static",
-        "all": "all.json",
-        "tags": "tags.json",
-        "post": "post",
-        "tag": "tag",
-        "images": false
-    },
-    "fields": {
-        "fields": ["id", "name", "dateLastActivity", "desc", "idList", "labels"],
-        "members": true,
-        "member_fields": ["fullName", "bio"],
-        "attachments": true,
-        "attachment_fields": ["previews", "url"]
-    },
-    "pagination": {
-        "entriesPerPage": 20
-    }
-}
-```
+You can pass the API Key, the API Token, the list ID and any other [option](#options) as:
+- environment variables
+- command-line arguments
+- property of the `config.json` file
+
 
 Run the following command to **download the JSON files**:
 ```sh
 tresor
 ```
 
-The config options can be also passed as environment variables:
+Passing the config options as environment variables:
 ```sh
 API__KEY=asenoiuwqeWNEUfnewoeFNWQetr3295023rer API__TOKEN=ASnqoiwqenmNEWOIWNrffnklef3io2r032rnewfoid3T439543 API__LIST=124f9hue2983232rj32052s tresor
 ```
@@ -97,12 +90,39 @@ The options you can add to the `config.json` file or pass via command-line/envir
 | fields.attachment_fields | The attachment fields to be displayed | `["previews", "url"]`       |
 | pagination.entriesPerPage | The number of entries in a single JSON | `20`                        |
 
+The default `config.json` file looks like the following one:
+```JSON
+{
+    "api": {
+        "url": "https://api.trello.com/1/"
+    },
+    "dest": {
+        "root": "static",
+        "all": "pages",
+        "tags": "tags",
+        "tagList": "tags.json",
+        "post": "post",
+        "tag": "tag",
+        "images": false
+    },
+    "fields": {
+        "fields": ["id", "name", "dateLastActivity", "desc", "idList", "labels"],
+        "members": true,
+        "member_fields": ["fullName", "bio"],
+        "attachments": true,
+        "attachment_fields": ["previews", "url"]
+    },
+    "pagination": {
+        "entriesPerPage": 20
+    }
+}
+```
 
 To get **further information** about the fields you can select, please refer to the [card](https://developers.trello.com/reference#card-object), [attachment](https://developers.trello.com/v1.0/reference#attachments) and [user](https://developers.trello.com/v1.0/reference#member-object) documentations.
 
 ### npx
 
-This module is suitable to be used with `npx`, so that you don't need to install the module and add it to your package dependencies.
+This module is suitable to be used with [`npx`](https://blog.npmjs.org/post/162869356040/introducing-npx-an-npm-package-runner), so that you don't need to install the module and add it to your package dependencies.
 Just add `npx tresor` to your `prebuild` hook in the `package.json` of your module:
 
 ```JSON
