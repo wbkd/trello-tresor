@@ -19,7 +19,8 @@ Setting up Continous Delivery it is then possible to configure a Webhook to trig
 ## Why ?
 
 This is a tool to build your next [JAMstack](https://jamstack.org/) project, allowing your codebase to be entirely **static** and **serverless**, but also has the advantages of a dynamic content management system, as your site will be **automatically updated** when the content changes. A static files codebase can be entirely hosted on a CDN, reducing infrastructure costs and increasing performance and availability.
-Trello offers a very **simple** UI and a very good API, with all necessary features to manage the content behind a small static website, a blog or a single page application:
+
+Trello offers a very **simple** UI and a well designed API, with all necessary features to manage the content behind a small static website, a blog or a single page application:
 - Markdown support
 - Attachments: files upload, render images in different resolutions and render thumbnails
 - Labels: can be used as tags or categories
