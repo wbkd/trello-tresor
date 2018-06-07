@@ -44,7 +44,7 @@ npm install tresor
 
 Requirements:
 - Trello **API Key** and the **API Token**: can be requested [here](https://trello.com/app-key)
-- **ID** of the list (column) to turn into a set of static JSON files. If you want for example to work on the list *Completed Projects* from the board [https://trello.com/b/lGQZunS7/company-overview](https://trello.com/b/lGQZunS7/company-overview), just open the JSON representation at [https://trello.com/b/lGQZunS7.json](https://trello.com/b/lGQZunS7.json) and search for the *Completed Projects* list. You will find the ID in an object like the following: ```{"name":"Completed Projects","id":"55107c98a2dd31ceef12dc3e"}```
+- **ID** of the list (column) to turn into a set of static JSON files. If you want for example to work on the list *Public* from the board [https://trello.com/b/dhhEnV8b/tresor-example](https://trello.com/b/dhhEnV8b/tresor-example), just open the JSON representation at [https://trello.com/b/dhhEnV8b.json](https://trello.com/b/dhhEnV8b.json) and search for the *Public* list. You will find the ID in an object like the following: ```{"name":"Public","id":"5b193b1a8a23ebb893ab7a02"}```
 
 You can pass the API Key, the API Token, the list ID and any other [option](#options) as:
 - environment variables
