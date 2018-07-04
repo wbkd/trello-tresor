@@ -5,5 +5,4 @@ dist/
 .env
 config.json
 
-src/static/
 static/
